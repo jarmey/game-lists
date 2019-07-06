@@ -1,3 +1,10 @@
 <ul>
-  <li>Descent</li>
+  <li *ngFor="let game of gameList">
+    {{game.name}}
+  </li>
 </ul>
+<div class="lists">
+  <ul>
+    <li>Deck #1</li>
+  </ul>
+</div>
