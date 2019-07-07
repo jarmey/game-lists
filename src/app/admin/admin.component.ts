@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GamesService } from '../games.service';
 
 @Component({
   selector: 'app-admin',
@@ -7,9 +8,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  gameList = [];
+
+  addGame = {
+    'name': '',
+    'edition': '',
+    'desc': ''
+  };
+
+  constructor(
+    private gamesService: GamesService
+  ) { }
+
+  getGameList() {
+    this.gamesService.listGames().subscribe((res) => {
+      this.gameList = res.body;
+    });
+  }
+
+  saveAddGame() {
+    console.log('add game: ', this.addGame);
+  }
 
   ngOnInit() {
+    this.getGameList();
   }
 
 }

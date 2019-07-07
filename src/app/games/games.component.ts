@@ -14,11 +14,14 @@ export class GamesComponent implements OnInit {
     private gamesService: GamesService
   ) { }
 
-  ngOnInit() {
+  getGameList() {
     this.gamesService.listGames().subscribe((res) => {
-    console.log('response: ', res.body);
-    this.gameList = res.body;
+      this.gameList = res.body;
     });
+  }
+
+  ngOnInit() {
+    this.getGameList();
   }
 
 }
