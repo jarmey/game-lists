@@ -20,6 +20,12 @@ export class AdminComponent implements OnInit {
     private gamesService: GamesService
   ) { }
 
+  resetAddGame() {
+    this.addGame.name = '';
+    this.addGame.edition = '';
+    this.addGame.desc = '';
+  }
+
   getGameList() {
     this.gamesService.listGames().subscribe((res) => {
       this.gameList = res.body;
@@ -27,7 +33,10 @@ export class AdminComponent implements OnInit {
   }
 
   saveAddGame() {
-    console.log('add game: ', this.addGame);
+    this.gamesService.addGame(this.addGame).subscribe((res) => {
+      this.gameList.push(res.body);
+      this.resetAddGame();
+    });
   }
 
   ngOnInit() {
